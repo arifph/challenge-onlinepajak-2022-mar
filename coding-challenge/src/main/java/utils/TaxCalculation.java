@@ -1,9 +1,8 @@
 package utils;
 
+import exception.InvalidInputException;
 import java.util.Arrays;
 import java.util.List;
-
-import exception.InvalidInputException;
 import model.Person;
 
 public class TaxCalculation {
@@ -11,7 +10,8 @@ public class TaxCalculation {
   public static final int SECOND_INCOME = 250000000;
   public static final int THIRD_INCOME = 500000000;
 
-  public static long reliefTax(boolean marriageStatus, int numberOfChildren) throws InvalidInputException {
+  public static long reliefTax(boolean marriageStatus, int numberOfChildren)
+      throws InvalidInputException {
     long taxRelief = 54000000;
     if (marriageStatus) {
       if (!ValidationUtils.isNumberOfChildrenValid(numberOfChildren)) {
