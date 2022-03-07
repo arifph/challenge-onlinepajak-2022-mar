@@ -2,14 +2,20 @@ package utils;
 
 import java.util.Arrays;
 import java.util.List;
+
+import exception.InvalidInputException;
 import model.Person;
 
 public class TaxCalculation {
-  public static long reliefTax(boolean marriageStatus, int numberOfChildren) throws Exception {
+  public static final int FIRST_INCOME = 50000000;
+  public static final int SECOND_INCOME = 250000000;
+  public static final int THIRD_INCOME = 500000000;
+
+  public static long reliefTax(boolean marriageStatus, int numberOfChildren) throws InvalidInputException {
     long taxRelief = 54000000;
     if (marriageStatus) {
       if (!ValidationUtils.isNumberOfChildrenValid(numberOfChildren)) {
-        throw new Exception("Please insert valid number of children!");
+        throw new InvalidInputException("Please insert valid number of children!");
       }
       switch (numberOfChildren) {
         case 0:
@@ -30,25 +36,25 @@ public class TaxCalculation {
   }
 
   public static List<Long> rateIncomeTax(long taxableIncome) {
-    long firstRate = (50000000 * 5L) / 100;
-    long secondRate = ((250000000 - 50000000) * 15L) / 100;
-    long thirdRate = ((500000000 - 250000000) * 25L) / 100;
+    long firstRate = (FIRST_INCOME * 5L) / 100;
+    long secondRate = ((SECOND_INCOME - FIRST_INCOME) * 15L) / 100;
+    long thirdRate = ((THIRD_INCOME - SECOND_INCOME) * 25L) / 100;
 
-    if (taxableIncome <= 50000000) {
+    if (taxableIncome <= FIRST_INCOME) {
       return List.of((taxableIncome * 5) / 100);
-    } else if (taxableIncome <= 250000000) {
-      return Arrays.asList(firstRate, ((taxableIncome - 50000000) * 15) / 100);
-    } else if (taxableIncome <= 500000000) {
-      return Arrays.asList(firstRate, secondRate, ((taxableIncome - 250000000) * 25) / 100);
+    } else if (taxableIncome <= SECOND_INCOME) {
+      return Arrays.asList(firstRate, ((taxableIncome - FIRST_INCOME) * 15) / 100);
+    } else if (taxableIncome <= THIRD_INCOME) {
+      return Arrays.asList(firstRate, secondRate, ((taxableIncome - SECOND_INCOME) * 25) / 100);
     } else {
       return Arrays.asList(
-          firstRate, secondRate, thirdRate, ((taxableIncome - 500000000) * 30) / 100);
+          firstRate, secondRate, thirdRate, ((taxableIncome - THIRD_INCOME) * 30) / 100);
     }
   }
 
-  public static long calculateTax(Person person) throws Exception {
+  public static long calculateTax(Person person) throws InvalidInputException {
     if (!ValidationUtils.isSalaryValid(person.getMonthlySalary())) {
-      throw new Exception("Please insert valid monthly salary");
+      throw new InvalidInputException("Please insert valid monthly salary");
     }
     long taxableIncome =
         (person.getMonthlySalary() * 12)

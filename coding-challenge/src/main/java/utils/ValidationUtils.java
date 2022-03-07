@@ -1,5 +1,7 @@
 package utils;
 
+import exception.InvalidInputException;
+
 public class ValidationUtils {
   public static boolean isNumberOfChildrenValid(int numberOfChildren) {
     boolean isValid = false;
@@ -17,13 +19,13 @@ public class ValidationUtils {
     return isValid;
   }
 
-  public static boolean isMarried(String isMarried) throws Exception {
+  public static boolean isMarried(String isMarried) throws InvalidInputException {
     if ("Y".equalsIgnoreCase(isMarried.trim())) {
       return true;
     } else if ("N".equalsIgnoreCase(isMarried.trim())) {
       return false;
     } else {
-      throw new Exception("Please enter valid answer!");
+      throw new InvalidInputException("Please enter valid answer!");
     }
   }
 }
