@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/challenge-onlinepajak-2022-mar.iml" filepath="$PROJECT_DIR$/.idea/challenge-onlinepajak-2022-mar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/coding-challenge/coding-challenge.iml" filepath="$PROJECT_DIR$/coding-challenge/coding-challenge.iml" />
+    </modules>
+  </component>
+</project>
